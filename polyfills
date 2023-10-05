@@ -1,0 +1,145 @@
+
+Reduce - 
+const sum = (val,agg) =>{
+    agg=agg+val;
+    return agg;
+}
+
+Array.prototype.myReduce = function(callback,agg){
+    let arr = this;
+    if(agg==undefined){
+        agg = arr[0];
+    }
+    for(let i=0;i<arr.length;i++){
+        agg = callback(arr[i], agg)
+    }
+    return agg;
+}
+
+console.log([1,2,3,4].myReduce(sum,0));
+console.log([1,2,3,4].myReduce(sum));
+
+
+
+
+Filter - 
+const checkages = (val) =>{
+    return val>=18;
+}
+
+Array.prototype.myFilter = function(callback){
+   let arr = this;
+   let res = [];
+   let j=0;
+    for(let i=0;i<arr.length;i++){
+        if(callback(arr[i],i,arr)){
+        res[j] = arr[i];
+        j++
+        }
+    }
+    return res;
+}
+
+console.log([23,17,19,22].myFilter(checkages))
+
+
+
+
+Find - 
+const checkages = (val) =>{
+    return val>=18;
+}
+
+Array.prototype.myFind = function(callback){
+   let arr = this;
+   let res;
+    for(let i=0;i<arr.length;i++){
+        if(callback(arr[i],i,arr)){
+        res= arr[i];
+        break;
+        }
+    }
+    return res;
+}
+
+console.log([17,15,19,22].myFind(checkages))
+
+
+
+
+Some - 
+const checkages = (val) =>{
+    return val>=18;
+}
+
+Array.prototype.mySome = function(callback){
+   let arr = this;
+   let res;
+    for(let i=0;i<arr.length;i++){
+        if(callback(arr[i],i,arr)){
+        res = true;
+        break;
+        }
+    }
+    if(res)
+    return true;
+    else
+    return false;
+}
+
+console.log([17,15,19,2].mySome(checkages))
+
+
+
+Every - 
+const checkages = (val) =>{
+    return val>=18;
+}
+
+Array.prototype.myEvery = function(callback){
+   let arr = this;
+   let res;
+    for(let i=0;i<arr.length;i++){
+        if(callback(arr[i],i,arr)){
+        res = true;
+        }
+        else{
+        res = false;
+        break;
+        }
+    }
+    return res;
+}
+
+console.log([19,20,2,28].myEvery(checkages))
+
+forEach - 
+const printMe = (val,idx) =>{
+    console.log("val = "+ val + " at index:"+idx)
+}
+
+Array.prototype.myForEach = function(callback){
+    let arr = this;
+    for(let i=0;i<arr.length;i++){
+        callback(arr[i],i,arr)
+    }
+}
+let array = [1,2,3,4]
+array.myForEach(printMe);
+
+map - 
+const multiple = (val) =>{
+    return val*2
+}
+
+Array.prototype.myMap = function(callback){
+    let arr = this;
+    let res = [];
+    for(let i=0;i<arr.length;i++){
+        res[i] = callback(arr[i],i,arr)
+    }
+    return res;
+}
+console.log([1,2,3,4].myMap(multiple));
+
+
